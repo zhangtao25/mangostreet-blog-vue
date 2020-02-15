@@ -34,9 +34,13 @@
         <use xlink:href="#iconQQ"></use>
       </svg>
 
-      <svg class="icon" aria-hidden="true">
-        <use xlink:href="#iconweibo"></use>
-      </svg>
+
+
+      <a href="https://weibo.com/u/5501958344" target="_blank">
+        <svg class="icon" aria-hidden="true">
+          <use xlink:href="#iconweibo"></use>
+        </svg>
+      </a>
 
 
       <a href="https://github.com/zhangtao25" target="_blank">
@@ -56,12 +60,12 @@
 
       <div slot="description">
 
-        <a-col :span="16">
+        <a-col :span="15">
           <p>Huster & Developer</p>
           <p><a-icon type="environment"/>上海</p>
         </a-col>
 
-        <a-col :span="8">
+        <a-col :span="9">
           <a-button type="primary">关注我</a-button>
         </a-col>
 

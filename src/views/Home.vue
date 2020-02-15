@@ -1,78 +1,58 @@
 <template>
-  <a-calendar>
-    <ul class="events" slot="dateCellRender" slot-scope="value">
-      <li v-for="item in getListData(value)" :key="item.content">
-        <a-badge :status="item.type" :text="item.content" />
-      </li>
-    </ul>
-    <template slot="monthCellRender" slot-scope="value">
-      <div v-if="getMonthData(value)" class="notes-month">
-        <section>{{getMonthData(value)}}</section>
-        <span>Backlog number</span>
-      </div>
-    </template>
-  </a-calendar>
+  <a-list itemLayout="vertical" size="large" :pagination="pagination" :dataSource="listData">
+    <div slot="footer"><b>ant design vue</b> footer part</div>
+    <a-list-item slot="renderItem" slot-scope="item, index" key="item.title">
+<!--      <template slot="actions" v-for="{type, text} in actions">-->
+<!--        <span :key="type">-->
+<!--          <a-icon :type="type" style="margin-right: 8px" />-->
+<!--          {{text}}-->
+<!--        </span>-->
+<!--      </template>-->
+      <img
+        slot="extra"
+        height="100"
+        alt="logo"
+        src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+      />
+      <a-list-item-meta :description="item.description">
+        <a slot="title" :href="item.href">{{item.title}}</a>
+<!--        <a-avatar slot="avatar" :src="item.avatar" />-->
+      </a-list-item-meta>
+      {{item.content}}
+    </a-list-item>
+  </a-list>
 </template>
 <script>
-  export default {
-    methods: {
-      getListData(value) {
-        let listData;
-        switch (value.date()) {
-          case 8:
-            listData = [
-              { type: 'warning', content: 'This is warning event.' },
-              { type: 'success', content: 'This is usual event.' },
-            ];
-            break;
-          case 10:
-            listData = [
-              { type: 'warning', content: 'This is warning event.' },
-              { type: 'success', content: 'This is usual event.' },
-              { type: 'error', content: 'This is error event.' },
-            ];
-            break;
-          case 15:
-            listData = [
-              { type: 'warning', content: 'This is warning event' },
-              { type: 'success', content: 'This is very long usual event。。....' },
-              { type: 'error', content: 'This is error event 1.' },
-              { type: 'error', content: 'This is error event 2.' },
-              { type: 'error', content: 'This is error event 3.' },
-              { type: 'error', content: 'This is error event 4.' },
-            ];
-            break;
-          default:
-        }
-        return listData || [];
-      },
+  const listData = [];
+  for (let i = 0; i < 23; i++) {
+    listData.push({
+      href: 'https://www.antdv.com/',
+      title: `封装一个流水号ID生成器：id-spring-boot-starter ${i}`,
+      avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+      description:
+        '别再用数据库自增ID，UUID了，用流水号生成器生成吧',
+      content:
+        '',
+    });
+  }
 
-      getMonthData(value) {
-        if (value.month() === 8) {
-          return 1394;
-        }
-      },
+  export default {
+    data() {
+      return {
+        listData,
+        pagination: {
+          onChange: page => {
+            console.log(page);
+          },
+          pageSize: 3,
+        },
+        actions: [
+          // { type: 'star-o', text: '156' },
+          // { type: 'like-o', text: '156' },
+          // { type: 'message', text: '2' },
+        ],
+      };
     },
   };
 </script>
-<style scoped>
-  .events {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-  }
-  .events .ant-badge-status {
-    overflow: hidden;
-    white-space: nowrap;
-    width: 100%;
-    text-overflow: ellipsis;
-    font-size: 12px;
-  }
-  .notes-month {
-    text-align: center;
-    font-size: 28px;
-  }
-  .notes-month section {
-    font-size: 28px;
-  }
-</style>
+<style></style>
