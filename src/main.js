@@ -6,6 +6,7 @@ import store from './store'
 
 import AntDesign from 'ant-design-vue';
 import 'ant-design-vue/dist/antd.css';
+import './registerServiceWorker'
 Vue.use(AntDesign);
 
 Vue.config.productionTip = false
